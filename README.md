@@ -1,4 +1,4 @@
-# isevengenerator
+# IsEvenGenerator
 Simple "is even" method generator.
 Standard libraries don't have functions to check if number is even, so I decided to generate one. It works only for positive numbers, but can be easily modified to support all cases.
 Size of generated file is slightly less than 90 GB.
