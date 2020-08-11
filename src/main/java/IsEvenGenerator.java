@@ -17,6 +17,23 @@ public class IsEvenGenerator {
         }
     }
 
+    private void drawProgressBar(float progress) {
+        System.out.print("\r[");
+
+        int maxBars = 50;
+        int bars    = (int)(progress * maxBars);
+
+        for (int i = 0; i < maxBars; ++i) {
+            if (i < bars) {
+                System.out.print("=");
+            } else {
+                System.out.print("-");
+            }
+        }
+
+        System.out.print("] " + (int)(progress * 100) + "%      ");
+    }
+
     private void generateIsEven(Writer writer) throws IOException {
         writer.write("private boolean isEven(int number) {\n");
         for (int i = 0; i >= 0; ++i) {
@@ -34,7 +51,12 @@ public class IsEvenGenerator {
             }
             writer.write("\t" + ifStartString + " (number == " + i + ") return " +
                   (i % 2 == 0 ? "true" : "false") + ";\n");
+
+            if ((i & 0xffff) == 0 || i == Integer.MAX_VALUE) {
+                drawProgressBar((float)i / (float)Integer.MAX_VALUE);
+            }
         }
+        System.out.println();
         writer.write("}");
     }
 }
